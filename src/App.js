@@ -1,26 +1,29 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { connect } from 'react-redux';
+import styled from 'styled-components';
+import PlaceBet from 'PlaceBet';
+import SeeRaise from 'SeeRaise';
+import { tick } from 'timer';
 
-function App() {
+const Container = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+`;
+
+function App({ tickAction }) {
+  setInterval(tickAction, 1000);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container>
+      <PlaceBet />
+      <SeeRaise />
+    </Container>
   );
 }
 
-export default App;
+const mdtp = {
+  tickAction: tick,
+};
+
+export default connect(null, mdtp)(App);

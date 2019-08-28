@@ -1,68 +1,34 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## State Change Detection POC
 
-## Available Scripts
+This is a simple app which implements the core functionality needed to intercept state changes, diff the changes and take other dispatchable actions based on these changes
 
-In the project directory, you can run:
+In order to illustrate the example, I created a simple app which will ask you to place a bet, time your response and annoyingly raise your bet by double every time. 
 
-### `npm start`
+## Key Files
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+App.js: In this file we set an interval to dispatch the tick event every second
+timer.js: This file is a reducer which is responsible for keeping the action time. It also contains the actions for ticking and resetting the timer
+bettor.js: This file is a reducer which contains the bet, and the action to place a bet.
+raiser.js: This file is a reducer which contains the raise amount, and the action to respond to a bet by doubling it. 
+listenForBet.js: This file contains a single function which is called in response to all redux actions. It then determines if actions need to be taken based on the diff of the state.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+## Key Concepts
 
-### `npm test`
+Notice that a tick of the timer does not trigger the actions in listenForBet. Only a change of the bet can trigger that action.
+Notice that the bet and the raise are contained in separate reducers and do not know about one another, yet the value from one affects the other through the diff.
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Libraries in use
 
-### `npm run build`
+[redux-on-state-change](https://npmjs.com/package/redux-on-state-change)
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+This is a redux middleware which calls our custom function any time the state is altered and passes in nextState, prevState, the action and the dispatch function.
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+[deep-object-diff](https://www.npmjs.com/package/deep-object-diff)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+This library takes the nextState and prevState and provides a diff object. We use this diff object to decide what actions to take
 
-### `npm run eject`
+## Running it
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Clone this bad boy, `yarn install` and `yarn start`
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+#Enjoy!
