@@ -6,11 +6,11 @@ In order to illustrate the example, I created a simple app which will ask you to
 
 ## Key Files
 
-App.js: In this file we set an interval to dispatch the tick event every second
-timer.js: This file is a reducer which is responsible for keeping the action time. It also contains the actions for ticking and resetting the timer
-bettor.js: This file is a reducer which contains the bet, and the action to place a bet.
-raiser.js: This file is a reducer which contains the raise amount, and the action to respond to a bet by doubling it. 
-listenForBet.js: This file contains a single function which is called in response to all redux actions. It then determines if actions need to be taken based on the diff of the state.
+App.js: In this file we set an interval to dispatch the tick event every second  
+timer.js: This file is a reducer which is responsible for keeping the action time. It also contains the actions for ticking and resetting the timer  
+bettor.js: This file is a reducer which contains the bet, and the action to place a bet.  
+raiser.js: This file is a reducer which contains the raise amount, and the action to respond to a bet by doubling it.  
+listenForBet.js: This file contains a single function which is called in response to all redux actions. It then determines if actions need to be taken based on the diff of the state.  
 
 ## Key Concepts
 
