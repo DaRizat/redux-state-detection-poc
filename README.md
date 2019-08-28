@@ -30,5 +30,3 @@ This library takes the nextState and prevState and provides a diff object. We us
 ## Running it
 
 Clone this bad boy, `yarn install` and `yarn start`
-
-# Enjoy!
